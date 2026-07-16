@@ -46,6 +46,58 @@ def phase1Generator():
     return phase1
 
 
+def quick_sort(rank):
+    '''
+    Sorts loser teams by their fifa ranking
+    :param rank:
+    :return:
+    '''
+    if len(rank)<=1:
+        return rank
+    pivot = rank[0]
+    left = [x for x in rank[1:] if x[0] < pivot[0]]
+    right = [x for x in rank[1:] if x[0] >= pivot[0]]
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+def loserBracketQualification(losers):  # Need to make a 128 team knockout stage
+    '''
+    Top 23 teams with the highest fifa ranking progress to phase2
+    :param losers: losers of phase1
+    :return: top 23 teams in losers bracket
+    '''
+    rank = [] # 2D array of integer fifa ranking and string name in an array in the array
+    for loser in losers:
+        with open(path, "r", newline="") as file:  # Reads file
+            reader = csv.reader(file)
+            next(reader)  # Skip the header
+            for row in reader:  # Goes through data file
+                if loser == row[3]:
+                    rank.append([int(row[2]), loser]) # Adds fifa ranking and team name to the rank array
+
+
+    return(quick_sort(rank)[0:23]) # returns the top 23 teams
+
+
+
+
+
+
+def phase2Knockout(winners, topLosers):
+    '''
+    Organises the phase 2 matches into winners and losers
+    :param winners:
+    :param topLosers:
+    :return:
+    '''
+
+    ## TODO add winners and losers to one list and repeat the phase1 process repeat until final
+
+
+
+
+
+
 def phase1Knockout(phase1):
     '''
     Organises the phase 1 matches into winners and losers
@@ -82,25 +134,7 @@ def phase1Knockout(phase1):
             print(f'winner: {winners[testcount]}, loser: {losers[testcount]}')   ##### test ##########
             testcount += 1   ##### test ##########
 
-def loserBracketQualification(losers): # Need to make a 128 team knockout stage
-    '''
-    Top 23 teams with the highest fifa ranking progress to phase2
-    :param losers:
-    :return: top 23 teams in losers bracket
-    '''
-
-    ## TODO sort losers bracket by fifa point ranking, then return top 23 losers bracket teams
-
-
-def phase2Knockout(winners, topLosers):
-    '''
-    Organises the phase 2 matches into winners and losers
-    :param winners:
-    :param topLosers:
-    :return:
-    '''
-
-    ## TODO add winners and losers to one list and repeat the phase1 process repeat until final
+    phase2Knockout(winners, loserBracketQualification(losers))
 
 
 
