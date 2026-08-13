@@ -6,6 +6,11 @@ BASE_DIR = Path(__file__).parent.parent
 path = BASE_DIR / "data" / "fifa_mens_rank.csv"
 
 def phaseGenerator(phase):
+    '''
+    Takes in list of teams and organises them into matches
+    :param phase: array of teams
+    :return: array of matches
+    '''
     teams = []
     while phase!=[]:
         team1 = [phase[randint(0, len(phase)-1)]]
@@ -22,8 +27,8 @@ def phaseGenerator(phase):
 def quick_sort(rank):
     '''
     Sorts loser teams by their fifa ranking
-    :param rank:
-    :return:
+    :param rank: fifa rankings and their teams
+    :return: sorted rankings
     '''
     if len(rank)<=1:
         return rank

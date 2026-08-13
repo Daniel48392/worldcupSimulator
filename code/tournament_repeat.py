@@ -6,24 +6,23 @@ from winner_calculator import winnerCalculator
 BASE_DIR = Path(__file__).parent.parent
 path = BASE_DIR / "data" / "fifa_mens_rank.csv"
 
-def phase2Knockout(stage1_winners, topLosers):
+
+
+def phaseRepeatKnockout(winners):
     '''
-    Organises the phase 2 matches into winners and losers
-    :param winners: winners of the first stage
-    :param topLosers: top losers of the first stage
-    :return: winners and losers of stage 2 of the tournament
+    Organises the last phases matches into winners and losers
+    :param winners: winners of the last round
+    :return: winners and losers of the round
     '''
-    phase2 = []
-    for topLoser in topLosers:
-        phase2.append(topLoser[1])
-    phase2 += stage1_winners
-
-    winners = []  # winners
-    losers = []  # losers
 
 
 
-    for match in phaseGenerator(phase2):
+    round_winners = []  # winners
+    round_losers = []  # losers
+
+
+
+    for match in phaseGenerator(winners):
         matchStats = []  # Fifa world ranking points for each remaining team
         with open(path, "r", newline="") as file:  # Reads file
             reader = csv.reader(file)
@@ -34,16 +33,9 @@ def phase2Knockout(stage1_winners, topLosers):
                 if row[3] == match[1][0]:  # Checks if the current row is the current match team
                     matchStats.insert(1, row[5])  # Adds second teams statistic to second index in the array
         winLose = winnerCalculator(matchStats)  # Determines which team will win
-        winners.append(match[winLose][0])  # Winner gets append to winners array
+        round_winners.append(match[winLose][0])  # Winner gets append to winners array
         match.pop(winLose)  # Winner gets removed from match array
-        losers.append(match[0][0])  # Remaining team in match array gets added to loser array
+        round_losers.append(match[0][0])  # Remaining team in match array gets added to loser array
 
 
-    return winners, losers
-
-
-
-
-
-
-
+    return round_winners, round_losers

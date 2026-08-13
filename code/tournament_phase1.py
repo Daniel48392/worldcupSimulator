@@ -9,6 +9,7 @@ path = BASE_DIR / "data" / "fifa_mens_rank.csv"
 def phase1Generator():
     '''
     Generates the games played in phase 1 of the tournament
+    :return: games for phase 1 of the tournament
     '''
     phase1 = []
 
@@ -34,15 +35,12 @@ def phase1Generator():
 def phase1Knockout(phase1):
     '''
     Organises the phase 1 matches into winners and losers
-
-    :param phase1:
-    :return:
+    :param phase1: games for phase 1 of the tournament
+    :return: winner, loser - winners and losers of the first stage
     '''
 
     winners = [] # winners
     losers = [] # losers
-
-    #testcount = 0  # test #########################
 
     for match in phase1:
         matchStats = [] # Fifa world ranking points for each team
@@ -57,7 +55,6 @@ def phase1Knockout(phase1):
                     matchStats.insert(1,row[5]) # Adds second teams statistic to second index in the array
 
             winLose = winnerCalculator(matchStats) # Determines which team will win
-            #print(match) ##### test ##########
             winners.append(match[winLose][0]) # Winner gets append to winners array
             match.pop(winLose) # Winner gets removed from match array
             losers.append(match[0][0]) # Remaining team in match array gets added to loser array
@@ -65,5 +62,4 @@ def phase1Knockout(phase1):
     return winners, losers
 
 
-            #print(f'winner: {winners[testcount]}, loser: {losers[testcount]}')   ##### test ##########
-            #testcount += 1   ##### test ##########
+
