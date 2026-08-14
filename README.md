@@ -4,7 +4,7 @@
 A Python simulation of a 210-team World Cup using a pure knockout format. Match outcomes are probabilistic and influenced by FIFA World Ranking points, allowing stronger teams to have a higher probability of winning while still allowing upsets.
 
 ## How it works
-210 teams participate in the tournament and are randomly assigned opponents, then phase 1 of the knockout occurs resulting in 105 teams automatically qualifying to the next round. Phase 1 losers are then organised by FIFA World Ranking points the highest ranked 23 teams among the first phase losers will re-enter the tournament to make a 128 team knockout for phase 2. Phase 2 then occurs knocking out half the competition and this repeats until stage 7 of the tournament. Stage 7 the winners will face eachother in the final and the losers will face eachother in the third place playoff. This then produces the top 4 teams.
+210 teams participate in the tournament and are randomly assigned opponents, then phase 1 of the knockout occurs resulting in 105 teams automatically qualifying to the next round. Phase 1 losers are then organised by FIFA World Ranking points the highest ranked 23 teams among the first phase losers will re-enter the tournament to make a 128 team knockout for phase 2. Phase 2 then occurs knocking out half the competition and this repeats until stage 7 of the tournament. Stage 7 the winners will face each other in the final and the losers will face each other in the third place playoff. This then produces the top 4 teams.
 
 ## Probability calculation
 Calculation: P(A) = 1 / (1 + 10^((RatingB - RatingA) / 400)) <br>
